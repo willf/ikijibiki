@@ -81,6 +81,7 @@ After editing the JSON, refresh the embedded data and rebuild:
 ```sh
 node scripts/embed-data.js
 node scripts/build.js
+cp dist/index.html index.html
 ```
 
 `embed-data.js` gzip-compresses the complete JSON file and writes the result
