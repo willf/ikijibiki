@@ -12,15 +12,14 @@ The root page can be opened directly in a modern browser:
 open index.html
 ```
 
-The page loads Lodash from jsDelivr, so an internet connection is needed for
-that dependency. The word data itself is embedded in the JavaScript and works
-when the page is opened with `file://`.
+The word data itself is embedded in the JavaScript, so the page works fully
+offline when opened with `file://`.
 
-The packaged page is generated in `dist/`:
+The packaged page is generated in place, at the root `index.html`:
 
 ```sh
 node scripts/build.js
-open dist/index.html
+open index.html
 ```
 
 There is no `package.json` or dependency installation step. Node.js 18 or
@@ -30,20 +29,19 @@ API.
 ## Project Layout
 
 ```text
-index.html       Standalone page opened during development
-css/index.css    Stylesheet source
-js/index.js      Browser logic and embedded word data
-data/words.json  Editable word and definition data
-images/          Images used by the page
-scripts/         Data-fetching, embedding, and build scripts
-dist/            Generated self-contained page, ignored by Git
+index.html            Generated, self-contained page; do not edit by hand
+index.template.html   Source template with <link>/<script src> references
+css/index.css         Stylesheet source
+js/index.js           Browser logic and embedded word data
+data/words.json       Editable word and definition data
+images/               Images used by the page
+scripts/              Data-fetching, embedding, and build scripts
 ```
 
-The root `index.html` currently contains embedded copies of the CSS and
-JavaScript. Keep those embedded sections in sync with `css/index.css` and
-`js/index.js` when changing the source files. `scripts/build.js` reads the
-root page, replaces stylesheet/script references when present, and copies the
-result plus `images/` into `dist/`.
+Edit `index.template.html`, `css/index.css`, and `js/index.js` as the sources
+of truth. `scripts/build.js` reads `index.template.html`, inlines
+`css/index.css` and `js/index.js`, and writes the result directly to the root
+`index.html`, which is what GitHub Pages serves.
 
 ## Add New Words
 
@@ -81,13 +79,11 @@ After editing the JSON, refresh the embedded data and rebuild:
 ```sh
 node scripts/embed-data.js
 node scripts/build.js
-cp dist/index.html index.html
 ```
 
 `embed-data.js` gzip-compresses the complete JSON file and writes the result
 into the `WORD_DATA_GZIP_B64` constant in `js/index.js`. Do not edit that long
-constant by hand. The build step then creates the distributable
-`dist/index.html`.
+constant by hand. The build step then regenerates the root `index.html`.
 
 ### Fetch words from Wordnik
 
@@ -130,6 +126,6 @@ appears after the estimate exceeds 200,000 words.
 - Use `data/words.json` as the source of truth for word data.
 - Run `node scripts/embed-data.js` after every data edit.
 - Run `node scripts/build.js` before testing the packaged page.
-- The generated `dist/` directory is ignored and should not be edited by hand.
-- The Wordnik CDN script is pinned with an integrity hash in `index.html`.
+- The root `index.html` is generated and should not be edited by hand; edit
+  `index.template.html` instead.
 - `LICENSE` contains the MIT license.

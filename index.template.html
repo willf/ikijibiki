@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Ikijibiki</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/index.css" />
+
+    <script src="js/index.js"></script>
+  </head>
+  <body>
+    <div id="body">
+      <h1>Ikijibiki 🚶 📖</h1>
+
+      <p>
+        In Japanese, to call someone an <i>ikijibiki</i> is to call them a
+        "walking dictionary." Are you an ikijibiki? At our latest count, Wordnik
+        has over <span id="dictionary_size">1,500,000</span> words with
+        definitions. Scan the words below. Here's a random sample—if you know a
+        word, click on it. You'll see a rough estimate of the total number of
+        English words you know. (Click on the question marks to see
+        definitions.)
+      </p>
+
+      <ul id="wordlist">
+        <li>
+          <span class="word">fish</span>
+          <span class="lookup">❓</span>
+        </li>
+        <li>
+          <span class="word">gyrovague</span>
+          <span class="lookup">❓</span>
+        </li>
+      </ul>
+
+      <p id="according">
+        According to what you've told me so far, you know about
+        <span id="estimated_vocabulary_size">0</span> words.
+        <span id="ikijibiki"></span>
+      </p>
+
+      <ul id="definitions"></ul>
+    </div>
+
+    <div id="definition" style="display: none">
+      <dl>
+        <dt><span id="definition_word" class="word"></span></dt>
+        <dd><span id="definition_text"></span></dd>
+      </dl>
+      <span class="attribution">
+        <span id="definition_attribution">
+          from Wiktionary, Creative Commons Attribution/Share-Alike
+          License.</span
+        >
+        <a
+          id="definition_link"
+          class="wn_link"
+          href="https://www.wordnik.com/words/gyrovague"
+          >more</a
+        >
+      </span>
+    </div>
+
+    <div id="footer">
+      <a href="https://www.wordnik.com"
+        ><img src="images/wordnik_badge_a3.png" alt="Wordnik Logo"
+      /></a>
+    </div>
+  </body>
+</html>
