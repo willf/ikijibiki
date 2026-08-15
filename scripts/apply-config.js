@@ -42,9 +42,13 @@ function parse_simple_toml(text) {
   return config;
 }
 
+function readConfig() {
+  return parse_simple_toml(fs.readFileSync(configPath, "utf8"));
+}
+
 function applyConfig() {
   let js = fs.readFileSync(jsPath, "utf8");
-  const config = parse_simple_toml(fs.readFileSync(configPath, "utf8"));
+  const config = readConfig();
 
   for (const [key, constantName] of Object.entries(CONFIG_CONSTANTS)) {
     if (typeof config[key] !== "number") {
@@ -61,7 +65,7 @@ function applyConfig() {
   fs.writeFileSync(jsPath, js);
 }
 
-module.exports = { applyConfig };
+module.exports = { applyConfig, readConfig };
 
 if (require.main === module) {
   applyConfig();

@@ -195,15 +195,8 @@ function go() {
     apply_theme(next);
   });
   var according = document.getElementById("according");
-  according.innerHTML = `
-    According to what you've told me so far, you know about
-    <span id="estimated_vocabulary_size">${pad_with_commas_html(0, String(document.dictionarySize).length)}</span>
-    words out of the approximately ${document.dictionarySize.toLocaleString()}
-    words we have definitions for, from the
-    <a href="https://www.ahdictionary.com">American Heritage Dictionary</a>
-    of the English Language, 5th Edition on
-    <a href="https://www.wordnik.com">Wordnik</a>.
-  `;
+  document.getElementById("estimated_vocabulary_size").innerHTML =
+    pad_with_commas_html(0, String(document.dictionarySize).length);
   var progress_threshold = document.getElementById("progress_threshold");
   progress_threshold.style.left =
     Math.min(100, (IKIJIBIKI_THRESHOLD / document.dictionarySize) * 100) + "%";

@@ -7,11 +7,12 @@
 
 const fs = require("fs");
 const path = require("path");
-const { applyConfig } = require("./apply-config");
+const { applyConfig, readConfig } = require("./apply-config");
 
 const root = path.join(__dirname, "..");
 
 applyConfig();
+const config = readConfig();
 
 const html = fs.readFileSync(path.join(root, "index.template.html"), "utf8");
 const css = fs.readFileSync(path.join(root, "css", "index.css"), "utf8");
@@ -22,7 +23,8 @@ let output = html
     '<link rel="stylesheet" href="css/index.css" />',
     `<style>\n${css}\n</style>`,
   )
-  .replace('<script src="js/index.js"></script>', `<script>\n${js}\n</script>`);
+  .replace('<script src="js/index.js"></script>', `<script>\n${js}\n</script>`)
+  .replace("{{DICTIONARY_SIZE}}", config.dictionary_size.toLocaleString());
 
 fs.writeFileSync(path.join(root, "index.html"), output);
 
