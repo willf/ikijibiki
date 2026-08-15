@@ -61,7 +61,7 @@ async function fetch_candidate_words(n) {
       hasDictionaryDef: true,
       minCorpusCount: 5,
       minLength: 5,
-      limit: Math.min(200, n - words.length),
+      limit: Math.min(500, n - words.length),
     });
     for (const entry of batch) {
       if (!seen.has(entry.word)) {
