@@ -349,8 +349,7 @@ ul#definitions > li span.attribution a {
   font-size: 1.15em;
 }
 
-#estimated_vocabulary_size,
-#dictionary_size {
+#estimated_vocabulary_size {
   font-weight: 700;
   font-size: 1.15em;
   color: var(--color-primary);
