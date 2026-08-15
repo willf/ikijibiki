@@ -128,6 +128,16 @@ function pad_with_commas(value, digit_width) {
   return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// Same as pad_with_commas, but wraps the leading zero padding in a span so it
+// can be styled lighter than the significant digits.
+function pad_with_commas_html(value, digit_width) {
+  var formatted = pad_with_commas(value, digit_width);
+  var significant = value.toLocaleString();
+  if (!formatted.endsWith(significant)) return formatted;
+  var pad = formatted.slice(0, formatted.length - significant.length);
+  return `<span class="pad-zero">${pad}</span>${significant}`;
+}
+
 function get_preferred_theme() {
   var saved = localStorage.getItem("ikijibiki_theme");
   if (saved === "dark" || saved === "light") return saved;
@@ -187,7 +197,7 @@ function go() {
   var according = document.getElementById("according");
   according.innerHTML = `
     According to what you've told me so far, you know about
-    <span id="estimated_vocabulary_size">${pad_with_commas(0, String(document.dictionarySize).length)}</span>
+    <span id="estimated_vocabulary_size">${pad_with_commas_html(0, String(document.dictionarySize).length)}</span>
     words out of the approximately ${document.dictionarySize.toLocaleString()}
     words we have definitions for, from the
     <a href="https://www.ahdictionary.com">American Heritage Dictionary</a>
@@ -229,12 +239,12 @@ function go() {
         show_definition(el.innerText, entries, attributions);
         words_selected = document.querySelectorAll(".highlight").length;
         estimated_vocabulary_size = estimateVocabularySizeGiven(words_selected);
-        estimated_vocabulary_size_text = pad_with_commas(
+        estimated_vocabulary_size_text = pad_with_commas_html(
           estimated_vocabulary_size,
           String(document.dictionarySize).length,
         );
         word_el = document.getElementById("estimated_vocabulary_size");
-        word_el.innerText = estimated_vocabulary_size_text;
+        word_el.innerHTML = estimated_vocabulary_size_text;
         var progress_fill = document.getElementById("progress_fill");
         var progress_percent = Math.min(
           100,

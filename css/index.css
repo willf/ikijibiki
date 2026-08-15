@@ -355,6 +355,11 @@ ul#definitions > li span.attribution a {
   color: var(--color-primary);
 }
 
+#estimated_vocabulary_size .pad-zero {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
 #according a {
   color: var(--color-primary);
   text-decoration: none;
