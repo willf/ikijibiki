@@ -7,8 +7,11 @@
 
 const fs = require("fs");
 const path = require("path");
+const { applyConfig } = require("./apply-config");
 
 const root = path.join(__dirname, "..");
+
+applyConfig();
 
 const html = fs.readFileSync(path.join(root, "index.template.html"), "utf8");
 const css = fs.readFileSync(path.join(root, "css", "index.css"), "utf8");

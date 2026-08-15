@@ -31,6 +31,7 @@ API.
 ```text
 index.html            Generated, self-contained page; do not edit by hand
 index.template.html   Source template with <link>/<script src> references
+config.toml           Game configuration (e.g. dictionary_size)
 css/index.css         Stylesheet source
 js/index.js           Browser logic and embedded word data
 data/words.json       Editable word and definition data
@@ -38,10 +39,26 @@ images/               Images used by the page
 scripts/              Data-fetching, embedding, and build scripts
 ```
 
-Edit `index.template.html`, `css/index.css`, and `js/index.js` as the sources
-of truth. `scripts/build.js` reads `index.template.html`, inlines
-`css/index.css` and `js/index.js`, and writes the result directly to the root
-`index.html`, which is what GitHub Pages serves.
+Edit `index.template.html`, `config.toml`, `css/index.css`, and `js/index.js`
+as the sources of truth. `scripts/build.js` reads `index.template.html`,
+inlines `css/index.css` and `js/index.js`, and writes the result directly to
+the root `index.html`, which is what GitHub Pages serves.
+
+## Configuration
+
+`config.toml` holds settings for the game:
+
+- `dictionary_size`: the total number of dictionary words used to scale the
+  estimated vocabulary size.
+- `ikijibiki_threshold`: the estimated vocabulary size above which the player
+  is celebrated as an "Ikijibiki" (walking dictionary).
+
+After editing it, rebuild; `scripts/build.js` bakes the values into
+`js/index.js` automatically before inlining it:
+
+```sh
+node scripts/build.js
+```
 
 ## Add New Words
 
@@ -125,7 +142,8 @@ appears after the estimate exceeds 200,000 words.
 
 - Use `data/words.json` as the source of truth for word data.
 - Run `node scripts/embed-data.js` after every data edit.
-- Run `node scripts/build.js` before testing the packaged page.
+- Run `node scripts/build.js` before testing the packaged page; it also
+  applies `config.toml` automatically.
 - The root `index.html` is generated and should not be edited by hand; edit
   `index.template.html` instead.
 - `LICENSE` contains the MIT license.

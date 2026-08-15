@@ -1,0 +1,11 @@
+# Configuration for the Ikijibiki vocabulary game.
+# Run `node scripts/apply-config.js` after editing this file, then rebuild
+# with `node scripts/build.js`.
+
+# Total number of words Wordnik has definitions for; used to scale the
+# estimated vocabulary size shown to the player.
+dictionary_size = 93000
+
+# Estimated vocabulary size above which the player is celebrated as an
+# "Ikijibiki" (walking dictionary).
+ikijibiki_threshold = 80000

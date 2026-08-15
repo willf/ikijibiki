@@ -24,6 +24,10 @@ function inflate_word_data(b64) {
   return new Response(stream).text().then((text) => JSON.parse(text));
 }
 
+// Baked in by scripts/apply-config.js from config.toml.
+const DICTIONARY_SIZE = 93000;
+const IKIJIBIKI_THRESHOLD = 80000;
+
 function load_word_data() {
   return inflate_word_data(WORD_DATA_GZIP_B64);
 }
@@ -121,7 +125,7 @@ function ready(fn) {
 
 function go() {
   console.log("setting up");
-  document.dictionarySize = 93000; // total words Wordnik has definitions for
+  document.dictionarySize = DICTIONARY_SIZE; // total words Wordnik has definitions for
   var dictionary_size_el = document.getElementById("dictionary_size");
   dictionary_size_el.innerText = document.dictionarySize.toLocaleString();
   var according = document.getElementById("according");
@@ -162,7 +166,7 @@ function go() {
         word_el = document.getElementById("estimated_vocabulary_size");
         word_el.innerText = estimated_vocabulary_size_text;
         ikijibiki_el = document.getElementById("ikijibiki");
-        if (estimated_vocabulary_size > 8000) {
+        if (estimated_vocabulary_size > IKIJIBIKI_THRESHOLD) {
           ikijibiki_el.innerText =
             "You are a walking dictionary! an Ikijibiki!! 🚶 📖 ";
           setDisplay(ikijibiki_el, "block");
