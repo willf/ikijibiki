@@ -4,68 +4,106 @@
     <title>Ikijibiki</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Ikijibiki: a quick vocabulary game. Click the words you know and find out how big your English vocabulary is."
+    />
+    <meta property="og:title" content="Ikijibiki 🚶 📖" />
+    <meta
+      property="og:description"
+      content="Are you a walking dictionary? Test your vocabulary."
+    />
+    <meta property="og:type" content="website" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%93%96</text></svg>"
+    />
     <link rel="stylesheet" href="css/index.css" />
 
     <script src="js/index.js"></script>
   </head>
   <body>
     <div id="body">
-      <h1>Ikijibiki 🚶 📖</h1>
+      <div class="page_header">
+        <h1>Ikijibiki 🚶 📖</h1>
+        <button
+          id="theme_toggle"
+          title="Toggle dark mode"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </div>
 
       <p>
         In Japanese, to call someone an <i>ikijibiki</i> is to call them a
-        "walking dictionary." Are you an ikijibiki? Scan the words below. Here's
-        a random sample—if you know a word, click on it. You'll see a rough
-        estimate of the total number of English words you know.
+        <i>walking dictionary</i>. Are you an ikijibiki? Scan the words below.
+        Here's a random sample—if you know a word, click on it. You'll see a
+        rough estimate of the total number of English words you know.
       </p>
-      <p>Click on the question marks to see definitions.)</p>
+      <p>Click on the question marks to see definitions.</p>
+
+      <div id="stats">
+        <p id="according">
+          According to what you've told me so far, you know about
+          <span id="estimated_vocabulary_size">0</span> words out of the
+          approximately <span id="dictionary_size">0</span> words in the
+          <a href="https://www.ahdictionary.com"
+            >American Heritage Dictionary</a
+          >
+          of the English Language, 5th Edition on
+          <a href="https://www.wordnik.com">Wordnik</a>.
+        </p>
+        <div id="progress_track" aria-hidden="true">
+          <div id="progress_fill"></div>
+          <div id="progress_threshold" title="Ikijibiki level"></div>
+        </div>
+        <p id="progress_label"></p>
+        <p id="ikijibiki"></p>
+
+        <div id="definition">
+          <dl>
+            <dt><span id="definition_word" class="word"></span></dt>
+            <dd><span id="definition_text"></span></dd>
+          </dl>
+          <span class="attribution">
+            <span id="definition_attribution">
+              from Wiktionary, Creative Commons Attribution/Share-Alike
+              License.</span
+            >
+            <a
+              id="definition_link"
+              class="wn_link"
+              href="https://www.wordnik.com/words/gyrovague"
+              >more</a
+            >
+          </span>
+        </div>
+      </div>
 
       <ul id="wordlist">
         <li>
           <span class="word">fish</span>
-          <span class="lookup">❓</span>
+          <span class="lookup">?</span>
         </li>
         <li>
           <span class="word">gyrovague</span>
-          <span class="lookup">❓</span>
+          <span class="lookup">?</span>
         </li>
       </ul>
 
-      <p id="according">
-        According to what you've told me so far, you know about
-        <span id="estimated_vocabulary_size">0</span> words out of the
-        approximately <span id="dictionary_size">0</span> words in the
-        <a href="https://www.ahdictionary.com">American Heritage Dictionary</a>
-        of the English Language, 5th Edition.
-        <span id="ikijibiki"></span>
-      </p>
-
       <ul id="definitions"></ul>
-    </div>
-
-    <div id="definition" style="display: none">
-      <dl>
-        <dt><span id="definition_word" class="word"></span></dt>
-        <dd><span id="definition_text"></span></dd>
-      </dl>
-      <span class="attribution">
-        <span id="definition_attribution">
-          from Wiktionary, Creative Commons Attribution/Share-Alike
-          License.</span
-        >
-        <a
-          id="definition_link"
-          class="wn_link"
-          href="https://www.wordnik.com/words/gyrovague"
-          >more</a
-        >
-      </span>
     </div>
 
     <div id="footer">
       <a href="https://www.wordnik.com"
         ><img src="images/wordnik_badge_a3.png" alt="Wordnik Logo"
       /></a>
+      <span
+        >Made with ❤️ by <a href="https://github.com/willf">Will Fitzgerald</a>.
+        Source code on
+        <a href="https://github.com/willf/ikijibiki">GitHub</a>.</span
+      >
     </div>
   </body>
 </html>

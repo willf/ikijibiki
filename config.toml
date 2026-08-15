@@ -8,4 +8,4 @@ dictionary_size = 93000
 
 # Estimated vocabulary size above which the player is celebrated as an
 # "Ikijibiki" (walking dictionary).
-ikijibiki_threshold = 80000
+ikijibiki_threshold = 74400
