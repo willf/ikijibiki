@@ -14,7 +14,7 @@ const zlib = require("zlib");
 
 const root = path.join(__dirname, "..");
 const jsPath = path.join(root, "js", "index.js");
-const wordsPath = path.join(root, "data", "words.ahd.json");
+const wordsPath = path.join(root, "data", "words.filtered.json");
 
 const js = fs.readFileSync(jsPath, "utf8");
 const data = JSON.parse(fs.readFileSync(wordsPath, "utf8"));
